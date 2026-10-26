@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>סטודיו שלט | בניית אתרים לעסקים קטנים</title>
+<meta name="description" content="אתרים מעוצבים לעסקים קטנים: מספרות, קונדיטוריות, מאמני כושר ועוד. אתר לדוגמה בחינם תוך 3 ימים, ומשלמים רק אם אהבתם. דף אחד ₪349, אתר מלא ₪499.">
+<meta name="theme-color" content="#0B0E1A">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="סטודיו שלט">
+<meta property="og:title" content="סטודיו שלט | אתר שנראה כמו מותג גדול">
+<meta property="og:description" content="אתר לדוגמה בחינם תוך 3 ימים. משלמים רק אם אהבתם.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F2B705'/%3E%3Ctext x='32' y='46' font-size='40' text-anchor='middle' fill='%2314213D' font-family='Arial' font-weight='bold'%3E%D7%A9%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"סטודיו שלט","description":"בניית אתרים מעוצבים לעסקים קטנים. אתר לדוגמה בחינם תוך 3 ימים, ומשלמים רק אם אהבתם.","telephone":"+972-55-561-5498","areaServed":{"@type":"Country","name":"Israel"},"priceRange":"₪349–₪499","knowsLanguage":"he"}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Heebo:wght@300;400;700;800;900&family=Secular+One&display=swap">
+<style>
+/* Layout: one dark stage per page — a lit 3D object floats over a giant word, plain sections follow. Single dark look by choice. */
+:root{
+  color-scheme:dark;
+  --bg:#09090B; --fg:#F4F1EC; --muted:#8C8C94; --line:#1F1F24; --panel:#111115;
+  --accent:#FFC300;
+  --word:"Anton","Heebo",Impact,sans-serif;
+  --body:"Heebo",system-ui,sans-serif;
+}
+/* each site gets its own deep ground, tinted toward its accent */
+#v-home{--accent2:#FF8A00;--bg:#0B0E1A;--panel:#131830;--line:#232A47;--muted:#8E95AD}
+#v-barber{--accent:#E8323C;--accent2:#FF7A45;--bg:#110B0B;--panel:#1C1313;--line:#2F2020;--muted:#A0908E}
+#v-bakery{--accent:#FF7A9A;--accent2:#FFB36B;--bg:#180C13;--panel:#24121C;--line:#3C2030;--muted:#B596A6}
+#v-coach{--accent:#FF6A1A;--accent2:#FFC300;--bg:#061220;--panel:#0D1D31;--line:#18324E;--muted:#8FA6BF}
+.view{--grad:linear-gradient(120deg,var(--accent),var(--accent2));background:var(--bg)}
+@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;overflow-x:hidden}
+h1,h2,h3{margin:0;line-height:1.1;text-wrap:balance}
+p{margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.view{direction:rtl}
+.wrap{max-width:1120px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* top bar */
+.bar .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:12px}
+.logo{font-weight:900;font-size:1.3rem;letter-spacing:-.01em}
+.logo i{font-style:normal;color:var(--accent)}
+.back{background:none;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:.9rem;color:var(--muted)}
+.back:hover{color:var(--fg);border-color:var(--muted)}
+.tag{font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+
+/* hero stage */
+.hero{position:relative;height:clamp(460px,78vh,720px);overflow:hidden}
+.hero .word{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--word);font-size:clamp(7rem,30vw,24rem);line-height:.8;letter-spacing:-.02em;white-space:nowrap;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--fg) 16%,var(--bg)) 0%,color-mix(in srgb,var(--accent) 72%,var(--bg)) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none;pointer-events:none}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .glow{position:absolute;left:50%;top:55%;width:60vmin;height:60vmin;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 35%,transparent) 0%,transparent 65%);filter:blur(20px);pointer-events:none}
+.hero .cap{position:absolute;inset:auto 0 0 0;padding-block:0 32px;background:linear-gradient(transparent,var(--bg) 70%)}
+.hero .cap .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:900;letter-spacing:-.02em;max-width:16ch}
+.hero .sub{color:var(--muted);max-width:34ch;margin-top:8px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#0B0B0D;font-weight:800;padding:14px 26px;border-radius:999px;border:0;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+
+/* marquee */
+.marquee{border-block:1px solid var(--line);overflow:hidden;padding-block:14px;direction:ltr}
+.marquee div{display:flex;gap:48px;width:max-content;animation:roll 28s linear infinite;font-weight:800;font-size:1.3rem;color:var(--muted)}
+.marquee span{direction:rtl}
+.marquee b{color:var(--accent)}
+@keyframes roll{to{transform:translateX(-50%)}}
+
+section{padding-block:72px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;color:var(--accent);font-weight:700;margin-bottom:10px;display:block}
+.h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;letter-spacing:-.02em;margin-bottom:32px}
+
+/* demo cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.card{position:relative;overflow:hidden;border-radius:18px;border:1px solid var(--line);background:var(--panel);text-align:right;cursor:pointer;padding:0;display:grid;grid-template-rows:220px auto;transition:border-color .2s}
+.card:hover{border-color:var(--c)}
+.card .art{position:relative;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 70%,color-mix(in srgb,var(--c) 45%,transparent),transparent 70%)}
+.card .art b{font-family:var(--word);font-size:clamp(3.4rem,8vw,6.5rem);line-height:1;color:color-mix(in srgb,var(--c) 85%,#fff);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.card:hover .art b{transform:scale(1.08)}
+.card .meta{padding:18px 20px 22px;display:grid;gap:4px}
+.card .meta strong{font-size:1.2rem}
+.card .meta span{color:var(--muted);font-size:.95rem}
+.card .meta em{font-style:normal;color:var(--c);font-weight:700;margin-top:6px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:28px;list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;gap:8px;position:relative;padding-top:20px}
+.steps li::before{content:"";position:absolute;top:0;right:0;left:0;height:2px;background:var(--line)}
+.steps li i{position:absolute;top:0;right:0;left:0;height:2px;background:var(--accent);transform-origin:100% 50%}
+.steps li strong{font-size:1.25rem}
+.steps li strong::before{content:counter(s) "  ";color:var(--accent);font-family:var(--word);font-weight:400}
+.steps li span{color:var(--muted)}
+
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;align-items:start}
+.plan{border:1px solid var(--line);border-radius:18px;padding:28px;display:grid;gap:14px;background:var(--panel)}
+.plan.main{border-color:var(--accent);box-shadow:0 0 60px -20px var(--accent)}
+.plan .price{font-family:var(--word);font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums;color:var(--price)}
+/* prices: a calm mint reads as "a good deal", a small shekel sign and no commas make the number feel smaller */
+:root{--price:#86E3B0}
+.cur{font-style:normal;font-family:var(--body);font-weight:700;font-size:.5em;vertical-align:.55em;margin-inline-end:3px;opacity:.8}
+.plan .price small{font-family:var(--body);font-size:.95rem;color:var(--muted)}
+.plan ul{margin:0;padding-inline-start:18px;display:grid;gap:6px;color:#CFCBC4}
+.note{color:var(--muted);font-size:.9rem;margin-top:18px}
+
+/* price list (demos) */
+.list{display:grid;border-top:1px solid var(--line)}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-block:20px;border-bottom:1px solid var(--line);position:relative}
+.row strong{font-size:clamp(1.1rem,2.4vw,1.5rem);font-weight:700}
+.row small{display:block;color:var(--muted);font-size:.9rem;font-weight:400}
+.row span{font-family:var(--word);font-size:clamp(1.3rem,2.6vw,1.8rem);color:var(--price);font-variant-numeric:tabular-nums;white-space:nowrap}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.box{border:1px solid var(--line);border-radius:18px;padding:24px;background:var(--panel);display:grid;gap:10px;align-content:start}
+.box h3{font-size:1.1rem}
+.hours{display:grid;grid-template-columns:auto 1fr;gap:6px 20px;font-variant-numeric:tabular-nums;color:#CFCBC4}
+.stats{display:flex;gap:36px;flex-wrap:wrap}
+.stats div{display:grid}
+.stats b{font-family:var(--word);font-size:3.2rem;line-height:1;color:var(--accent);font-weight:400;font-variant-numeric:tabular-nums}
+.stats small{color:var(--muted)}
+.contact{display:grid;gap:10px;justify-items:start}
+.contact .big{font-size:clamp(2rem,6vw,4rem);font-weight:900;letter-spacing:-.03em;line-height:1}
+.foot{color:var(--muted);font-size:.85rem;padding-block:40px;border-top:1px solid var(--line)}
+
+/* lower sections */
+.vs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.box.bad h3{color:var(--muted)}
+.box.good{border-color:var(--accent);box-shadow:0 0 70px -30px var(--accent)}
+.ticks{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ticks li{display:flex;gap:12px;align-items:flex-start}
+.ticks li::before{flex:0 0 24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:.75rem;font-weight:900;margin-top:2px}
+.ticks.no li::before{content:"✕";background:#2A1416;color:#FF6B6B}
+.ticks.yes li::before{content:"✓";background:color-mix(in srgb,var(--accent) 22%,transparent);color:var(--accent)}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px}
+.why div{display:grid;gap:8px;padding-top:18px;border-top:2px solid var(--accent)}
+.why strong{font-size:1.3rem}
+.why span{color:var(--muted)}
+.revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.rev{margin:0;border:1px solid var(--line);border-radius:18px;padding:26px;background:var(--panel);display:grid;gap:14px;align-content:start}
+.stars{color:var(--accent);letter-spacing:3px;font-size:1.15rem}
+.rev blockquote{margin:0;font-size:1.15rem;line-height:1.5}
+.rev figcaption{color:var(--muted);font-size:.9rem}
+.rev figcaption i{font-style:normal;border:1px solid var(--line);border-radius:999px;padding:1px 8px;font-size:.75rem;margin-inline-start:6px}
+.open{font-style:normal;font-size:.8rem;font-weight:700;display:inline-flex;align-items:center;gap:6px;margin-inline-start:10px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);vertical-align:middle}
+.open::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.open.yes::before{background:#3DDC84;box-shadow:0 0 0 0 #3DDC84;animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px transparent}}
+.guar{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center}
+@media (max-width:640px){.guar{grid-template-columns:1fr;gap:28px}}
+.stamp{width:180px;height:180px;border-radius:50%;border:3px dashed var(--accent);display:grid;place-items:center;text-align:center;font-family:var(--word);font-size:2.3rem;line-height:1;color:var(--accent);transform:rotate(-12deg)}
+.lead2{font-size:1.15rem;color:#CFCBC4;max-width:46ch}
+.anchor{color:var(--muted);margin:-18px 0 28px}
+.anchor s{color:#CFCBC4}
+.badge{justify-self:start;background:var(--accent);color:#0B0B0D;font-size:.75rem;font-weight:800;padding:3px 10px;border-radius:999px}
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding-block:22px;font-size:clamp(1.05rem,2.2vw,1.3rem);font-weight:700}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--accent);font-family:var(--body);font-weight:300;font-size:2rem;line-height:1;transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{color:#CFCBC4;padding-bottom:22px;max-width:60ch}
+.band{position:relative;overflow:hidden;background:var(--accent);color:#0B0B0D;padding-block:96px}
+.bandword{position:absolute;top:50%;right:0;transform:translateY(-50%);font-family:var(--word);font-size:clamp(6rem,18vw,14rem);line-height:1;white-space:nowrap;color:rgba(0,0,0,.09);pointer-events:none;direction:ltr}
+.band .contact{position:relative}
+.band .lead2{color:#2A2A2A}
+.band .who{font-weight:800;font-size:1.2rem}
+.btn.dark{background:#0B0B0D;color:#F4F1EC}
+.btn.line{background:transparent;color:#0B0B0D;border:2px solid #0B0B0D;box-shadow:none}
+.float{position:fixed;z-index:30;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:max(16px,env(safe-area-inset-left,0px));color:#0B0B0D;background:#FFC300;border:0;border-radius:999px;padding:14px 22px;font-weight:800;cursor:pointer;box-shadow:0 12px 30px -8px rgba(0,0,0,.7);transform:translateY(180%);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.float.show{transform:none}
+
+/* tidy grids: rows fill evenly, never one card left alone */
+.cards,.steps,.why,.revs{grid-template-columns:1fr}
+@media (min-width:640px){.cards,.steps,.why,.revs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.plans{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+.plan .btn{justify-self:start;margin-top:6px}
+.addon{margin-top:18px;border:1px dashed var(--line);border-radius:18px;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.addon span{display:block;color:var(--muted);font-size:.95rem}
+.addon b{font-family:var(--word);font-size:1.7rem;font-weight:400;white-space:nowrap;color:var(--price)}
+.addon small{font-family:var(--body);font-size:.85rem;color:var(--muted)}
+.cta-col{display:grid;gap:10px;justify-items:start}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap}
+.micro{font-size:.85rem;color:var(--muted)}
+.band .micro{color:#3A3A3A}
+
+/* colour and rhythm */
+.btn{background:var(--grad);position:relative;overflow:hidden;box-shadow:0 10px 40px -12px var(--accent)}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-120%);animation:shine 5s ease-in-out infinite;pointer-events:none}
+.btn.dark,.btn.ghost{box-shadow:none}
+@keyframes shine{0%,72%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.eyebrow{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;justify-self:start}
+.band{background:var(--grad)}
+.view > section:not(.band){position:relative;overflow:clip}
+.view > section:not(.band)::before{content:"";position:absolute;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 13%,transparent),transparent 70%);top:0;left:-200px;pointer-events:none;animation:drift 22s ease-in-out infinite alternate}
+.view > section:not(.band):nth-of-type(even)::before{left:auto;right:-200px;top:auto;bottom:0;background:radial-gradient(circle,color-mix(in srgb,var(--accent2) 10%,transparent),transparent 70%)}
+.view > section > .wrap{position:relative}
+@keyframes drift{to{transform:translate(140px,0) scale(1.1)}}
+.facts{padding-block:44px;border-bottom:1px solid var(--line)}
+.facts .stats{justify-content:space-around;text-align:center}
+.facts .stats b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.plan.main{border:1px solid transparent;background:linear-gradient(var(--panel),var(--panel)) padding-box,conic-gradient(from var(--ang),var(--accent),var(--accent2),transparent 40%,transparent 60%,var(--accent)) border-box;animation:orbit 6s linear infinite}
+@keyframes orbit{to{--ang:360deg}}
+.row{isolation:isolate}
+.row::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(270deg,color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%);transform:scaleX(0);transform-origin:100% 50%;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.row:hover::after{transform:scaleX(1)}
+.progress{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:3px;z-index:35;transform:scaleX(0);transform-origin:100% 50%;pointer-events:none}
+.card,.rev,.plan{transform-style:preserve-3d}
+
+.toast{position:fixed;z-index:45;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;background:#F4F1EC;color:#0B0B0D;padding:10px 18px;border-radius:999px;font-weight:700;font-size:.9rem;pointer-events:none;transition:opacity .3s,transform .3s;max-width:calc(100% - 32px);text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.bub{position:absolute;bottom:-24px;border-radius:50%;background:rgba(255,255,255,.4);pointer-events:none;animation:rise linear infinite}
+@keyframes rise{to{transform:translateY(-520px);opacity:0}}
+
+/* motion layer */
+.cursor{position:fixed;top:0;left:0;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#fff;mix-blend-mode:difference;pointer-events:none;z-index:50;opacity:0;transition:width .25s,height .25s,margin .25s,opacity .3s}
+.cursor.on{opacity:1}
+.cursor.big{width:70px;height:70px;margin:-35px 0 0 -35px}
+.wipe{position:fixed;inset:0;z-index:40;transform:scaleX(0);pointer-events:none}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em}
+.w>span{display:inline-block}
+#demos{overflow:hidden}
+.cards.h{display:flex;flex-wrap:nowrap}
+.cards.h .card{flex:0 0 min(44vw,540px)}
+
+/* calm mode is set by script: the computer's "reduce motion" setting, unless the visitor turns motion on */
+html.calm *{transition:none!important;animation:none!important}
+.motion{position:fixed;z-index:36;bottom:calc(22px + env(safe-area-inset-bottom,0px));right:max(16px,env(safe-area-inset-right,0px));background:#1B1F33;color:#F4F1EC;border:1px solid #2E3555;border-radius:999px;padding:6px 14px;font-size:.85rem;cursor:pointer}
+@media (max-width:520px){.motion{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+.outline-word{position:absolute;top:18px;right:0;font:900 clamp(5rem,14vw,11rem)/1 var(--body);color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--fg) 11%,transparent);white-space:nowrap;pointer-events:none;user-select:none}
+.why div{border-top-color:transparent;position:relative}
+.why div::before{content:"";position:absolute;top:-2px;right:0;left:0;height:2px;background:var(--grad);transform:scaleX(var(--p,1));transform-origin:100% 50%}
+</style>
+</head>
+<body>
+
+<!-- ================= STUDIO ================= -->
+<div class="view" id="v-home">
+  <div class="bar"><div class="wrap"><span class="logo">סטודיו <i>שלט</i></span><span class="tag">אתרים לעסקים קטנים</span></div></div>
+  <div class="hero" data-kind="sign">
+    <div class="word">WEB</div><div class="glow"></div><canvas aria-hidden="true"></canvas>
+    <div class="cap"><div class="wrap">
+      <div><h1>אתר שנראה כמו מותג גדול</h1><p class="sub">במחיר של עסק קטן. מוכן תוך 3 ימים, ומשלמים רק אם אהבתם.</p></div>
+      <div class="cta-col">
+        <div class="cta-row"><a class="btn" href="https://wa.me/972555615498" target="_blank" rel="noopener">קבלו אתר לדוגמה בחינם</a><button class="btn ghost" data-scroll="demos">לראות דוגמאות</button></div>
+        <span class="micro">בלי התחייבות · משלמים רק אם אהבתם</span>
+      </div>
+    </div></div>
+  </div>
+  <div class="marquee" aria-hidden="true"><div>
+    <span>מספרות <b>·</b> קונדיטוריות <b>·</b> מאמני כושר <b>·</b> מורים פרטיים <b>·</b> קוסמטיקאיות <b>·</b> מוסכים <b>·</b></span>
+    <span>מספרות <b>·</b> קונדיטוריות <b>·</b> מאמני כושר <b>·</b> מורים פרטיים <b>·</b> קוסמטיקאיות <b>·</b> מוסכים <b>·</b></span>
+  </div></div>
+
+  <div class="facts"><div class="wrap stats">
+    <div><b data-n="3">3</b><small>ימים עד אתר מוכן</small></div>
+    <div><b>₪0</b><small>משלמים מראש</small></div>
+    <div><b data-n="100">100</b><small>אחוז מותאם לטלפון</small></div>
+  </div></div>
+
+  <section><div class="wrap">
+    <span class="eyebrow">למה בכלל אתר</span>
+    <h2 class="h2">הלקוחות שלך בודקים בטלפון לפני שהם מגיעים</h2>
+    <div class="vs">
+      <div class="box bad"><h3>בלי אתר</h3><ul class="ticks no"><li>מחפשים אותך בגוגל ומוצאים את המתחרה</li><li>שואלים בוואטסאפ על מחירים ושעות, שוב ושוב</li><li>נראה כמו עסק קטן, גם כשאתה מקצוען</li></ul></div>
+      <div class="box good"><h3>עם אתר של שלט</h3><ul class="ticks yes"><li>הלקוח רואה מחירים ושעות ושולח הודעה בלחיצה</li><li>נראה כמו מותג, ואפשר לגבות בהתאם</li><li>קישור אחד לשלוח לכל מי ששואל</li></ul></div>
+    </div>
+  </div></section>
+
+  <section id="demos"><div class="wrap">
+    <span class="eyebrow">אתרים לדוגמה</span>
+    <h2 class="h2">לחצו על אתר כדי לראות אותו</h2>
+    <div class="cards">
+      <button class="card" data-go="barber" style="--c:#E8323C"><div class="art"><b>FADE</b></div><div class="meta"><strong>מספרת קו ישר</strong><span>מחירון, שעות וקביעת תור בוואטסאפ</span><em>לצפייה באתר ←</em></div></button>
+      <button class="card" data-go="bakery" style="--c:#FF7A9A"><div class="art"><b>SWEET</b></div><div class="meta"><strong>העוגות של נוגה</strong><span>תפריט עוגות והזמנות לאירועים</span><em>לצפייה באתר ←</em></div></button>
+      <button class="card" data-go="coach" style="--c:#FF6A1A"><div class="art"><b>STRONG</b></div><div class="meta"><strong>רוני פיט</strong><span>מסלולי אימון ושיעור ניסיון</span><em>לצפייה באתר ←</em></div></button>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <span class="eyebrow">איך זה עובד</span>
+    <h2 class="h2">שלושה צעדים, בלי התחייבות</h2>
+    <ol class="steps">
+      <li><i></i><strong>שולחים פרטים</strong><span>שם העסק, מחירים, שעות ותמונות מהטלפון.</span></li>
+      <li><i></i><strong>מקבלים אתר לדוגמה</strong><span>תוך 3 ימים מקבלים קישור. מבקשים שינויים, ואני מתקן.</span></li>
+      <li><i></i><strong>משלמים רק אם אהבתם</strong><span>לא אהבתם? לא משלמים כלום.</span></li>
+    </ol>
+  </div></section>
+
+  <section><div class="wrap">
+    <span class="eyebrow">מחירים</span>
+    <h2 class="h2">מחיר אחד, בלי הפתעות</h2>
+    <p class="anchor">סטודיו לבניית אתרים גובה בדרך כלל <s>אלפי שקלים</s>. כאן משלמים פעם אחת, ורק אם אהבתם.</p>
+    <div class="plans">
+      <div class="plan main"><span class="badge">מומלץ</span><strong>עסק מלא</strong><div class="price"><i class="cur">₪</i>499 <small>חד פעמי</small></div>
+        <ul><li>כל מה שבדף אחד</li><li>גלריית תמונות</li><li>טופס פנייה</li><li>עזרה בהופעה בגוגל</li></ul>
+        <button class="btn" data-scroll="contact">אני רוצה את זה</button></div>
+      <div class="plan"><strong>דף אחד</strong><div class="price"><i class="cur">₪</i>349 <small>חד פעמי</small></div>
+        <ul><li>עמוד אחד עם אנימציות</li><li>מחירון ושעות פתיחה</li><li>כפתור וואטסאפ וטלפון</li><li>מוכן תוך 3 ימים</li></ul>
+        <button class="btn ghost" data-scroll="contact">מתחילים בקטן</button></div>
+    </div>
+    <div class="addon"><div><strong>תוספת: עדכונים שוטפים</strong><span>שינוי מחירים ושעות, החלפת תמונות, מבצעים וחגים</span></div><b><i class="cur">₪</i>49 <small>לחודש</small></b></div>
+    <p class="note">כתובת אתר (דומיין) בתשלום נפרד, בערך ₪60–100 לשנה.</p>
+  </div></section>
+
+  <section><div class="wrap guar">
+    <div class="stamp" aria-hidden="true"><span>בלי<br>סיכון</span></div>
+    <div><span class="eyebrow">ההבטחה</span><h2 class="h2">לא אהבתם? לא משלמים.</h2>
+      <p class="lead2">מקבלים אתר מוכן לפני שמשלמים שקל. רק אם הוא מוצא חן בעיניכם, הוא שלכם.</p></div>
+  </div></section>
+
+  <section><div class="wrap">
+    <span class="eyebrow">שאלות</span><h2 class="h2">מה שכולם שואלים</h2>
+    <div class="faq">
+      <details><summary>כמה זמן זה לוקח?</summary><p>אתר לדוגמה מוכן תוך 3 ימים. אחרי האישור, האתר עולה לאוויר תוך יום או יומיים.</p></details>
+      <details><summary>אני לא מבין במחשבים. זו בעיה?</summary><p>בכלל לא. שולחים פרטים ותמונות בוואטסאפ, ואני עושה את כל השאר.</p></details>
+      <details><summary>ומה אם ארצה לשנות משהו אחר כך?</summary><p>שולחים הודעה עם השינוי. במסלול העדכונים זה כלול. בלי המסלול, מתאמים מחיר לפי השינוי.</p></details>
+      <details><summary>יש עלויות נוספות?</summary><p>רק כתובת האתר (דומיין), בערך ₪60–100 לשנה. אין דמי שימוש חודשיים חובה.</p></details>
+      <details><summary>זה ייראה טוב בטלפון?</summary><p>כן. כל אתר נבנה קודם לטלפון, כי משם מגיעים רוב הלקוחות.</p></details>
+    </div>
+  </div></section>
+
+  <section class="band" id="contact"><div class="bandword" aria-hidden="true">LET'S BUILD · LET'S BUILD · LET'S BUILD ·</div><div class="wrap contact">
+    <span class="big">רוצים אתר כזה?</span>
+    <span class="lead2">שלחו הודעה עם שם העסק, ותקבלו אתר לדוגמה בחינם.</span>
+    <div class="cta-row"><a class="btn dark" href="https://wa.me/972555615498" target="_blank" rel="noopener">שלחו הודעה בוואטסאפ</a><button class="btn line" data-copy="0555615498">העתקת המספר</button></div>
+    <span class="who">סטודיו שלט · <span dir="ltr">055-561-5498</span></span>
+    <span class="micro">בלי התחייבות · משלמים רק אם אהבתם</span>
+  </div></section>
+  <div class="wrap foot">סטודיו שלט · אתרים לעסקים קטנים</div>
+</div>
+
+<!-- ================= BARBER ================= -->
+<div class="view" id="v-barber" hidden>
+  <div class="bar"><div class="wrap"><span class="logo">קו <i>ישר</i></span><button class="back" data-go="home">→ חזרה לסטודיו שלט</button></div></div>
+  <div class="hero" data-kind="pole">
+    <div class="word">FADE</div><div class="glow"></div><canvas aria-hidden="true"></canvas>
+    <div class="cap"><div class="wrap">
+      <div><h1>תספורת בלי לחכות בתור</h1><p class="sub">גברים, זקן ופייד. שולחים הודעה ומקבלים שעה עוד היום.</p></div>
+      <span class="btn">קביעת תור בוואטסאפ</span>
+    </div></div>
+  </div>
+  <section><div class="wrap">
+    <span class="eyebrow">למה קו ישר</span><h2 class="h2">תספורת שלא צריך לתקן אחר כך</h2>
+    <div class="why"><div><strong>בלי לחכות</strong><span>קובעים שעה בוואטסאפ ומגיעים בדיוק בזמן.</span></div><div><strong>פייד מדויק</strong><span>מכונה ומספריים, עד שזה יוצא בדיוק כמו בתמונה.</span></div><div><strong>מחיר סגור</strong><span>המחיר שבמחירון הוא המחיר. בלי הפתעות בקופה.</span></div></div>
+  </div></section>
+  <section><div class="wrap">
+    <span class="eyebrow">ביקורות</span><h2 class="h2">מה הלקוחות אומרים</h2>
+    <div class="revs">
+      <figure class="rev"><div class="stars">★★★★★</div><blockquote>"סוף סוף מספרה שעומדת בזמנים. נכנסתי בדיוק בשעה שקבעתי."</blockquote><figcaption>דני <i>ביקורת לדוגמה</i></figcaption></figure>
+      <figure class="rev"><div class="stars">★★★★★</div><blockquote>"הפייד הכי נקי שהיה לי."</blockquote><figcaption>אורי <i>ביקורת לדוגמה</i></figcaption></figure>
+      <figure class="rev"><div class="stars">★★★★★</div><blockquote>"גם הבן שלי כבר לא מוכן ללכת לאף מקום אחר."</blockquote><figcaption>מיכל <i>ביקורת לדוגמה</i></figcaption></figure>
+    </div>
+  </div></section>
+  <section><div class="wrap">
+    <span class="eyebrow">מחירון</span><h2 class="h2">מה עושים היום?</h2>
+    <div class="list">
+      <div class="row"><strong>תספורת גבר<small>כולל חפיפה</small></strong><span><i class="cur">₪</i>59</span></div>
+      <div class="row"><strong>פייד<small>מכונה ומספריים</small></strong><span><i class="cur">₪</i>69</span></div>
+      <div class="row"><strong>סידור זקן<small>תער חם ומגבת</small></strong><span><i class="cur">₪</i>35</span></div>
+      <div class="row"><strong>תספורת וזקן<small>החבילה המלאה</small></strong><span><i class="cur">₪</i>89</span></div>
+      <div class="row"><strong>ילד עד גיל 12</strong><span><i class="cur">₪</i>45</span></div>
+    </div>
+  </div></section>
+  <section><div class="wrap info">
+    <div class="box"><h3>שעות פתיחה <em class="open" data-hours="10-20,10-20,10-20,10-20,10-20,9-14,"></em></h3><div class="hours"><span>א׳–ה׳</span><span>10:00–20:00</span><span>ו׳</span><span>09:00–14:00</span><span>שבת</span><span>סגור</span></div></div>
+    <div class="box"><h3>איפה אנחנו</h3><p style="color:var(--muted)">כתובת העסק ומפה יופיעו כאן</p><span>050-000-0000</span></div>
+  </div></section>
+  <section class="band" id="cta-barber"><div class="bandword" aria-hidden="true">FADE · FADE · FADE · FADE ·</div><div class="wrap contact">
+    <span class="big">יש לך 20 דקות היום?</span>
+    <span class="lead2">שלח הודעה ונמצא לך שעה עוד היום.</span>
+    <span class="btn dark">קביעת תור בוואטסאפ</span>
+  </div></section>
+  <div class="wrap foot">אתר לדוגמה שבנה סטודיו שלט</div>
+</div>
+
+<!-- ================= BAKERY ================= -->
+<div class="view" id="v-bakery" hidden>
+  <div class="bar"><div class="wrap"><span class="logo">העוגות של <i>נוגה</i></span><button class="back" data-go="home">→ חזרה לסטודיו שלט</button></div></div>
+  <div class="hero" data-kind="cake">
+    <div class="word">SWEET</div><div class="glow"></div><canvas aria-hidden="true"></canvas>
+    <div class="cap"><div class="wrap">
+      <div><h1>עוגות מהבית, לכל אירוע</h1><p class="sub">ימי הולדת, מגשי קינוחים ועוגות בעיצוב אישי. אפויות באותו בוקר.</p></div>
+      <span class="btn">הזמנה בוואטסאפ</span>
+    </div></div>
+  </div>
+  <section><div class="wrap">
+    <span class="eyebrow">למה אצל נוגה</span><h2 class="h2">עוגה שכולם שואלים מאיפה היא</h2>
+    <div class="why"><div><strong>אפוי באותו בוקר</strong><span>לא מהמקפיא. העוגה נאפית ביום שאתם אוספים.</span></div><div><strong>עיצוב לפי בקשה</strong><span>שולחים תמונה או רעיון, ומקבלים עוגה בדיוק כזו.</span></div><div><strong>מחיר ידוע מראש</strong><span>מחיר מלא לפני ההזמנה, בלי תוספות בדרך.</span></div></div>
+  </div></section>
+  <section><div class="wrap">
+    <span class="eyebrow">ביקורות</span><h2 class="h2">מה אומרים אחרי האירוע</h2>
+    <div class="revs">
+      <figure class="rev"><div class="stars">★★★★★</div><blockquote>"העוגה ליום ההולדת הייתה מושלמת, וכולם שאלו מאיפה."</blockquote><figcaption>שירן <i>ביקורת לדוגמה</i></figcaption></figure>
+      <figure class="rev"><div class="stars">★★★★★</div><blockquote>"טעים כמו של סבתא, ונראה כמו מקונדיטוריה."</blockquote><figcaption>יעל <i>ביקורת לדוגמה</i></figcaption></figure>
+      <figure class="rev"><div class="stars">★★★★★</div><blockquote>"הזמנתי ביום ראשון וקיבלתי ביום שלישי, בדיוק כמו שהובטח."</blockquote><figcaption>רון <i>ביקורת לדוגמה</i></figcaption></figure>
+    </div>
+  </div></section>
+  <section><div class="wrap">
+    <span class="eyebrow">התפריט</span><h2 class="h2">מה אופים לכם?</h2>
+    <div class="list">
+      <div class="row"><strong>עוגת שוקולד וקרם<small>16 פרוסות</small></strong></div>
+      <div class="row"><strong>עוגת גבינה פירורים<small>12 פרוסות</small></strong></div>
+      <div class="row"><strong>מגש מאפינס<small>12 יחידות</small></strong></div>
+      <div class="row"><strong>עוגה בעיצוב אישי<small>לפי הזמנה</small></strong></div>
+    </div>
+  </div></section>
+  <section><div class="wrap info">
+    <div class="box"><h3>איך מזמינים</h3><p style="color:#CFCBC4">שולחים הודעה לפחות 3 ימים לפני האירוע. איסוף עצמי או משלוח באזור.</p></div>
+    <div class="box"><h3>שעות איסוף <em class="open" data-hours="16-19,16-19,16-19,16-19,16-19,8-12,"></em></h3><div class="hours"><span>א׳–ה׳</span><span>16:00–19:00</span><span>ו׳</span><span>08:00–12:00</span></div></div>
+  </div></section>
+  <section class="band" id="cta-bakery"><div class="bandword" aria-hidden="true">SWEET · SWEET · SWEET · SWEET ·</div><div class="wrap contact">
+    <span class="big">יש לכם אירוע בקרוב?</span>
+    <span class="lead2">הזמינו עכשיו, ותקבלו עוגה טרייה ביום האירוע.</span>
+    <span class="btn dark">הזמנה בוואטסאפ</span>
+  </div></section>
+  <div class="wrap foot">אתר לדוגמה שבנה סטודיו שלט</div>
+</div>
+
+<!-- ================= COACH ================= -->
+<div class="view" id="v-coach" hidden>
+  <div class="bar"><div class="wrap"><span class="logo">רוני<i>.</i>פיט</span><button class="back" data-go="home">→ חזרה לסטודיו שלט</button></div></div>
+  <div class="hero" data-kind="dumbbell">
+    <div class="word">STRONG</div><div class="glow"></div><canvas aria-hidden="true"></canvas>
+    <div class="cap"><div class="wrap">
+      <div><h1>חזקים יותר תוך 12 שבועות</h1><p class="sub">אימונים אישיים בפארק או בבית, לכל רמה. מתחילים בשיעור ניסיון.</p></div>
+      <span class="btn">לשיעור ניסיון</span>
+    </div></div>
+  </div>
+  <section><div class="wrap">
+    <div class="stats"><div><b data-n="3">3</b><small>אימונים בשבוע</small></div><div><b data-n="45">45</b><small>דקות לאימון</small></div><div><b data-n="12">12</b><small>שבועות לתוצאה</small></div></div>
+  </div></section>
+  <section><div class="wrap">
+    <span class="eyebrow">למה רוני</span><h2 class="h2">אימון שאתה באמת מגיע אליו</h2>
+    <div class="why"><div><strong>מתאים לכל רמה</strong><span>גם אם לא התאמנת אף פעם. מתחילים מאיפה שאתה נמצא.</span></div><div><strong>קרוב לבית</strong><span>בפארק או אצלך בסלון. בלי נסיעות ובלי מנוי לחדר כושר.</span></div><div><strong>תוכנית אישית</strong><span>כל אימון בנוי בשבילך, ומתעדכן לפי ההתקדמות.</span></div></div>
+  </div></section>
+  <section><div class="wrap">
+    <span class="eyebrow">ביקורות</span><h2 class="h2">מי שכבר התחיל</h2>
+    <div class="revs">
+      <figure class="rev"><div class="stars">★★★★★</div><blockquote>"ירדתי 6 קילו בשלושה חודשים, בלי דיאטה מטורפת."</blockquote><figcaption>אבי <i>ביקורת לדוגמה</i></figcaption></figure>
+      <figure class="rev"><div class="stars">★★★★★</div><blockquote>"אף פעם לא החזקתי מעמד באימונים. עם רוני כן."</blockquote><figcaption>נועה <i>ביקורת לדוגמה</i></figcaption></figure>
+      <figure class="rev"><div class="stars">★★★★★</div><blockquote>"האימונים בפארק הם החלק האהוב עליי בשבוע."</blockquote><figcaption>גיל <i>ביקורת לדוגמה</i></figcaption></figure>
+    </div>
+  </div></section>
+  <section><div class="wrap">
+    <span class="eyebrow">מסלולים</span><h2 class="h2">בוחרים ומתחילים</h2>
+    <div class="list">
+      <div class="row"><strong>שיעור ניסיון<small>היכרות, בדיקת כושר ותוכנית</small></strong><span><i class="cur">₪</i>49</span></div>
+      <div class="row"><strong>כרטיסייה<small>10 אימונים אישיים, תקף 3 חודשים</small></strong><span><i class="cur">₪</i>849</span></div>
+      <div class="row"><strong>זוגי<small>10 אימונים לשניים</small></strong><span><i class="cur">₪</i>1290</span></div>
+    </div>
+  </div></section>
+  <section class="band" id="cta-coach"><div class="bandword" aria-hidden="true">STRONG · STRONG · STRONG ·</div><div class="wrap contact">
+    <span class="big">האימון הראשון ב-₪49</span>
+    <span class="lead2">שיעור ניסיון אחד, בלי התחייבות. אם לא מתאים, לא ממשיכים.</span>
+    <span class="btn dark">לשיעור ניסיון</span>
+  </div></section>
+  <div class="wrap foot">אתר לדוגמה שבנה סטודיו שלט</div>
+</div>
+
+<div class="cursor" aria-hidden="true"></div><div class="wipe" aria-hidden="true"></div>
+<button class="float" data-scroll="contact">רוצים אתר כזה?</button><div class="progress" aria-hidden="true"></div><div class="toast" role="status"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script>
+(function(){
+  var views=['home','barber','bakery','coach'];
+  var osCalm=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches),forced=null;
+  try{forced=localStorage.getItem('shelet-motion');}catch(e){}
+  if(!forced){var wm=/shelet-motion=(on|off)/.exec(window.name||'');if(wm)forced=wm[1];}
+  // Eitan's choice: animations are on by default, and the visitor can switch them off
+  var calm=forced==='off';
+  document.documentElement.classList.toggle('calm',calm);
+  // a visible switch, so a visitor whose computer turns animations off can still turn them on (and back off)
+  {var mb=document.createElement('button');mb.className='motion';mb.textContent=calm?'✨ הפעלת אנימציות':'כיבוי אנימציות';
+    mb.addEventListener('click',function(){
+      var val=calm?'on':'off';try{localStorage.setItem('shelet-motion',val);}catch(e){}window.name='shelet-motion='+val;
+      if(val==='off'){location.reload();return;}
+      // turn motion on right away, no reload needed
+      calm=false;document.documentElement.classList.remove('calm');mb.textContent='כיבוי אנימציות';
+      if(hasG){initMotion();initCursor();ScrollTrigger.refresh();}
+      if(active){active.size();active.start();}
+    });document.body.appendChild(mb);}
+  var hasG=!!(window.gsap&&window.ScrollTrigger), has3=!!window.THREE;
+  var stages={}, active=null;
+
+  // headlines rise word by word
+  document.querySelectorAll('.hero h1, .h2').forEach(function(h){h.innerHTML=h.textContent.split(' ').map(function(w){return '<span class="w"><span>'+w+'</span></span>';}).join(' ');});
+
+  // honest urgency: open/closed from the real hours and the viewer's clock
+  document.querySelectorAll('.open[data-hours]').forEach(function(el){
+    var d=new Date(),day=el.getAttribute('data-hours').split(',')[d.getDay()],h=d.getHours()+d.getMinutes()/60;
+    var p=day?day.split('-').map(Number):null,on=!!(p&&h>=p[0]&&h<p[1]);
+    el.classList.toggle('yes',on);el.textContent=on?'פתוח עכשיו':'סגור עכשיו';
+  });
+
+  /* ---------- 3D objects, all built from code ---------- */
+  function std(c,o){return new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.4,metalness:0},o||{}));}
+  var chrome=function(){return std(0xD9DAE0,{metalness:.85,roughness:.22,emissive:0x1a1a20});};
+  function cyl(rt,rb,h,m,seg){return new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,seg||64),m);}
+
+  var build={
+    pole:function(g){
+      var c=document.createElement('canvas');c.width=c.height=256;var x=c.getContext('2d');
+      x.fillStyle='#F4F1EC';x.fillRect(0,0,256,256);x.translate(128,128);x.rotate(-Math.PI/4);
+      for(var i=-6;i<6;i++){x.fillStyle=i%2?'#E8323C':'#1F4E9C';x.fillRect(-400,i*64,800,26);}
+      var t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(1,2.2);
+      g.add(cyl(.55,.55,3.2,std(0xffffff,{map:t,roughness:.3})));
+      var glass=cyl(.7,.7,3.3,new THREE.MeshStandardMaterial({color:0xffffff,transparent:true,opacity:.1,roughness:.05,side:THREE.DoubleSide}));g.add(glass);
+      [1.76,-1.76].forEach(function(y){var cap=cyl(.82,.82,.24,chrome());cap.position.y=y;g.add(cap);});
+      var dome=new THREE.Mesh(new THREE.SphereGeometry(.55,48,24,0,Math.PI*2,0,Math.PI/2),chrome());dome.position.y=1.88;g.add(dome);
+      var tip=new THREE.Mesh(new THREE.ConeGeometry(.3,.5,48),chrome());tip.position.y=-2.12;tip.rotation.x=Math.PI;g.add(tip);
+      g.rotation.z=.12;
+      return function(){t.offset.y-=.006;};
+    },
+    cake:function(g){
+      var sponge=std(0x5A3320,{roughness:.8}),cream=std(0xFFF3E6,{roughness:.6}),pink=std(0xFF8FAB,{roughness:.35});
+      var plate=cyl(2,1.85,.08,std(0xEDE7E1,{roughness:.2}));plate.position.y=-1.08;g.add(plate);
+      var a=cyl(1.4,1.4,.72,sponge);a.position.y=-.66;g.add(a);
+      var b=cyl(1.42,1.42,.12,cream);b.position.y=-.24;g.add(b);
+      var d=cyl(1.4,1.4,.6,sponge);d.position.y=.12;g.add(d);
+      var top=cyl(1.47,1.47,.2,pink);top.position.y=.5;g.add(top);
+      for(var i=0;i<22;i++){var an=i/22*Math.PI*2,len=.18+((i*37)%10)/22;
+        var dr=cyl(.075,.075,len,pink,12);dr.position.set(Math.cos(an)*1.43,.42-len/2,Math.sin(an)*1.43);g.add(dr);
+        var bl=new THREE.Mesh(new THREE.SphereGeometry(.08,12,8),pink);bl.position.set(Math.cos(an)*1.43,.42-len,Math.sin(an)*1.43);g.add(bl);}
+      var cols=[0xFFD166,0x7BDFF2,0xB2F7EF,0xF7F7F7,0xA06CD5];
+      for(var j=0;j<70;j++){var r=Math.sqrt((j*7919%1000)/1000)*1.3,th=j*2.399;
+        var sp=new THREE.Mesh(new THREE.BoxGeometry(.13,.035,.035),std(cols[j%5],{roughness:.3}));
+        sp.position.set(Math.cos(th)*r,.61,Math.sin(th)*r);sp.rotation.y=th*3;g.add(sp);}
+      var candle=cyl(.07,.07,.6,std(0xF4F1EC),24);candle.position.y=.9;g.add(candle);
+      var flame=new THREE.Mesh(new THREE.SphereGeometry(.08,16,12),new THREE.MeshBasicMaterial({color:0xFFC14D}));flame.scale.set(1,1.9,1);flame.position.y=1.3;g.add(flame);
+      var light=new THREE.PointLight(0xFFB347,1.6,5);light.position.y=1.35;g.add(light);
+      g.rotation.x=.38;g.position.y=-.2;
+      return function(t){var f=1+Math.sin(t*.02)*.08+Math.sin(t*.031)*.05;flame.scale.set(f,1.9*f,f);light.intensity=1.4*f;};
+    },
+    dumbbell:function(g){
+      var dark=std(0x1B1D22,{roughness:.5,metalness:.3}),ring=std(0xFF6A1A,{emissive:0x7a2200,roughness:.3});
+      var h=cyl(.12,.12,3,chrome(),32);h.rotation.z=Math.PI/2;g.add(h);
+      [-1,1].forEach(function(s){
+        [1.05,.88,.72].forEach(function(r,i){var p=cyl(r,r,.22,dark);p.rotation.z=Math.PI/2;p.position.x=s*(.72+i*.25);g.add(p);
+          if(i===0){var tor=new THREE.Mesh(new THREE.TorusGeometry(r-.02,.035,12,64),ring);tor.rotation.y=Math.PI/2;tor.position.x=s*(.72-.115);g.add(tor);}});
+        var col=cyl(.22,.22,.18,chrome(),32);col.rotation.z=Math.PI/2;col.position.x=s*1.48;g.add(col);});
+      g.rotation.set(.35,0,-.35);
+      return null;
+    },
+    sign:function(g){
+      var c=document.createElement('canvas');c.width=1024;c.height=390;var x=c.getContext('2d');
+      // gold foil: a soft light band across the face, like polished brass
+      var foil=x.createLinearGradient(0,0,1024,390);foil.addColorStop(0,'#C99400');foil.addColorStop(.42,'#FFCB3D');foil.addColorStop(.58,'#F2B705');foil.addColorStop(1,'#B88400');
+      x.fillStyle=foil;x.fillRect(0,0,1024,390);
+      // a fine double frame, as on an engraved plaque
+      x.strokeStyle='#14213D';x.lineWidth=6;x.strokeRect(26,26,972,338);x.lineWidth=2;x.strokeRect(42,42,940,306);
+      x.textAlign='center';x.textBaseline='middle';x.font='160px "Secular One", "Heebo", sans-serif';x.direction='rtl';
+      // engraved letters: a light edge below, the dark letter on top
+      x.fillStyle='rgba(255,214,90,.6)';x.fillText('סטודיו שלט',512,203);
+      x.fillStyle='#2A7FD4';x.fillText('סטודיו שלט',512,199);
+      // true colours on screen, so the gold doesn't wash out toward white
+      var face=new THREE.CanvasTexture(c);face.encoding=THREE.sRGBEncoding;
+      var gold=function(){return std(0xC99400,{metalness:.6,roughness:.28,emissive:0x2a1c00});};
+      var plate=new THREE.Mesh(new THREE.BoxGeometry(4.2,1.6,.14),[gold(),gold(),gold(),gold(),std(0xffffff,{map:face,roughness:.3,metalness:.15}),gold()]);
+      plate.position.y=-1.3;g.add(plate);
+      // a slightly larger dark backing gives the plate a framed edge
+      var back=new THREE.Mesh(new THREE.BoxGeometry(4.36,1.76,.1),std(0x14213D,{roughness:.5}));back.position.set(0,-1.3,-.04);g.add(back);
+      [-1.7,1.7].forEach(function(sx){var ch=cyl(.025,.025,1.6,gold(),8);ch.position.set(sx,.3,0);g.add(ch);
+        var sc=cyl(.07,.07,.04,gold(),16);sc.rotation.x=Math.PI/2;sc.position.set(sx,-.68,.08);g.add(sc);});
+      g.position.y=2.15;g.scale.setScalar(.72);
+      return null;
+    }
+  };
+
+  function makeStage(view){
+    var hero=document.querySelector('#v-'+view+' .hero'),kind=hero.getAttribute('data-kind'),canvas=hero.querySelector('canvas');
+    var accent=new THREE.Color(getComputedStyle(hero).getPropertyValue('--accent').trim()||'#FFC300');
+    var r=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
+    r.setPixelRatio(Math.min(window.devicePixelRatio||1,2));r.outputEncoding=THREE.sRGBEncoding;
+    var scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(32,1,.1,100);
+    scene.add(new THREE.AmbientLight(0xffffff,.35));
+    var key=new THREE.DirectionalLight(0xffffff,1.2);key.position.set(3,4,5);scene.add(key);
+    var rim=new THREE.PointLight(accent,3,20);rim.position.set(-4,1.5,-2);scene.add(rim);
+    var fill=new THREE.PointLight(accent,1.2,20);fill.position.set(4,-2,3);scene.add(fill);
+    var pivot=new THREE.Group(),g=new THREE.Group();pivot.add(g);scene.add(pivot);
+    var upd=build[kind](g);
+    // floating dust in the light
+    var pg=new THREE.BufferGeometry(),pts=new Float32Array(900);
+    for(var i=0;i<900;i+=3){pts[i]=(Math.random()-.5)*16;pts[i+1]=(Math.random()-.5)*9;pts[i+2]=(Math.random()-.5)*8-1;}
+    pg.setAttribute('position',new THREE.BufferAttribute(pts,3));
+    var dust=new THREE.Points(pg,new THREE.PointsMaterial({color:accent,size:.035,transparent:true,opacity:.7}));scene.add(dust);
+    var st={scroll:0,intro:0,raf:0,mx:0,my:0,tx:0,ty:0,base:.45};
+    function size(){var w=hero.clientWidth,h=hero.clientHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.position.set(0,.2,w<640?16:9.5);
+      // on phones, shift the frame (not the camera angle) so the object sits above the headline
+      if(w<640)cam.setViewOffset(w,h,0,Math.round(h*.2),w,h);else cam.clearViewOffset();cam.updateProjectionMatrix();}
+    function frame(t){
+      var s=st.scroll,spin=calm?0:t*.00035;
+      st.tx+=(st.mx-st.tx)*.06;st.ty+=(st.my-st.ty)*.06;
+      dust.rotation.y=t*.00004;dust.position.y=s*1.5;
+      if(!calm){for(var i=1;i<900;i+=3){pts[i]+=.006+(i%7)*.0012;if(pts[i]>4.5)pts[i]=-4.5;}pg.attributes.position.needsUpdate=true;}
+      if(kind==='sign'){pivot.rotation.z=Math.sin(t*.0016)*.05*(calm?0:1)+st.intro*.25;pivot.rotation.y=s*.6+st.tx*.3;pivot.rotation.x=st.ty*.15;}
+      else{pivot.rotation.y=spin+s*Math.PI*2+st.tx*.5;pivot.rotation.x=st.ty*.3;pivot.position.y=st.base+(calm?0:Math.sin(t*.0012)*.08)-s*.6;pivot.scale.setScalar(1+s*.6-st.intro*.4);}
+      if(upd&&!calm)upd(t);
+      r.render(scene,cam);
+    }
+    function loop(t){frame(t);st.raf=requestAnimationFrame(loop);}
+    return {st:st,size:size,start:function(){size();cancelAnimationFrame(st.raf);if(calm){frame(0);}else st.raf=requestAnimationFrame(loop);},stop:function(){cancelAnimationFrame(st.raf);}};
+  }
+
+  function start3D(view){
+    if(!has3)return;
+    try{if(!stages[view])stages[view]=makeStage(view);}catch(e){return;}
+    if(active&&active!==stages[view])active.stop();
+    active=stages[view];active.start();
+    if(hasG&&!calm){active.st.intro=1;gsap.to(active.st,{intro:0,duration:1.6,ease:'elastic.out(1,0.4)',overwrite:true});}
+  }
+  addEventListener('resize',function(){if(active)active.size();});
+  // the object leans toward the pointer
+  addEventListener('pointermove',function(e){if(active){active.st.mx=(e.clientX/innerWidth-.5)*2;active.st.my=(e.clientY/innerHeight-.5)*2;}});
+
+  /* ---------- scroll motion ---------- */
+  function initMotion(){
+    gsap.registerPlugin(ScrollTrigger);
+    views.forEach(function(v){
+      var hero=document.querySelector('#v-'+v+' .hero');
+      // pin the stage while the object turns and the word grows
+      gsap.timeline({scrollTrigger:{trigger:hero,start:'top top',end:'+=110%',pin:true,scrub:.6,onUpdate:function(self){if(stages[v])stages[v].st.scroll=self.progress;}}})
+        .to(hero.querySelector('.word'),{scale:1.5,xPercent:-12,ease:'none'},0)
+        .to(hero.querySelector('.cap'),{y:-80,ease:'none'},0);
+    });
+    // desktop: the demo cards slide sideways while the section is pinned
+    gsap.matchMedia().add('(min-width: 900px)',function(){
+      var sec=document.getElementById('demos'),track=sec.querySelector('.cards');track.classList.add('h');
+      var dist=function(){return Math.max(0,track.scrollWidth-track.clientWidth);};
+      gsap.to(track,{x:function(){return dist();},ease:'none',scrollTrigger:{trigger:sec,start:'top top',end:function(){return '+='+dist()*1.6;},pin:true,scrub:.6,invalidateOnRefresh:true}});
+      return function(){track.classList.remove('h');};
+    });
+    // content stays readable at rest: only position moves, never opacity
+    // items wait a little lower and rise into place as they enter (always visible, only shifted)
+    var risers='.card, .plan, .addon, .row, .box, .steps li, .why div, .faq details, .ticks li, .stats div, .hours span';
+    gsap.set(risers,{y:70});
+    ScrollTrigger.batch(risers,{start:'top 95%',once:true,
+      onEnter:function(els){gsap.to(els,{y:0,duration:1.1,ease:'expo.out',stagger:.09,overwrite:'auto'});}});
+    // gentle parallax: cards keep drifting upward a bit faster than the page
+    gsap.utils.toArray('.rev, .why div, .plan, .box').forEach(function(el,i){
+      var d=12+(i%3)*10;
+      gsap.fromTo(el,{yPercent:d},{yPercent:-d,ease:'none',scrollTrigger:{trigger:el,start:'top bottom',end:'bottom top',scrub:true}});
+    });
+    // reviews swing in like cards dealt onto a table
+    gsap.utils.toArray('.revs').forEach(function(g){
+      var cards=g.querySelectorAll('.rev');gsap.set(cards,{y:110,rotation:function(i){return i%2?5:-5;}});
+      ScrollTrigger.create({trigger:g,start:'top 90%',once:true,onEnter:function(){gsap.to(cards,{y:0,rotation:0,duration:1.2,ease:'expo.out',stagger:.14});}});
+    });
+    // a huge outlined word behind every section slides sideways as you scroll
+    document.querySelectorAll('.view > section:not(.band)').forEach(function(sec){
+      var eb=sec.querySelector('.eyebrow');if(!eb)return;
+      var gw=document.createElement('div');gw.className='outline-word';gw.setAttribute('aria-hidden','true');gw.textContent=eb.textContent+' · '+eb.textContent;
+      sec.insertBefore(gw,sec.firstChild);
+      gsap.fromTo(gw,{xPercent:-25},{xPercent:10,ease:'none',scrollTrigger:{trigger:sec,start:'top bottom',end:'bottom top',scrub:true}});
+    });
+    // prices count up from zero when they arrive
+    document.querySelectorAll('.row span, .plan .price, .addon b').forEach(function(el){
+      var node=[].filter.call(el.childNodes,function(c){return c.nodeType===3&&/\d/.test(c.nodeValue);})[0];if(!node)return;
+      var m=node.nodeValue.match(/([\d,]+)/);if(!m)return;
+      var n=+m[1].replace(/,/g,''),o={v:0},pre=node.nodeValue.slice(0,m.index),post=node.nodeValue.slice(m.index+m[1].length);
+      ScrollTrigger.create({trigger:el,start:'top 92%',once:true,onEnter:function(){
+        gsap.to(o,{v:n,duration:1.3,ease:'power3.out',onUpdate:function(){node.nodeValue=pre+Math.round(o.v)+post;}});}});
+    });
+    // the accent line above each reason draws itself
+    gsap.utils.toArray('.why').forEach(function(w){
+      var items=w.querySelectorAll('div');gsap.set(items,{'--p':0});
+      ScrollTrigger.create({trigger:w,start:'top 88%',once:true,onEnter:function(){gsap.to(items,{'--p':1,duration:1,ease:'power2.inOut',stagger:.18});}});
+    });
+    // bubbles rising through each closing band
+    gsap.utils.toArray('.band').forEach(function(b){
+      for(var k=0;k<12;k++){var u=document.createElement('i'),sz=6+Math.random()*16;u.className='bub';
+        u.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+(Math.random()*100)+'%;animation-duration:'+(6+Math.random()*6)+'s;animation-delay:-'+(Math.random()*8)+'s';b.appendChild(u);}
+    });
+    ScrollTrigger.batch('.h2',{start:'top 90%',once:true,
+      onEnter:function(els){els.forEach(function(h){gsap.from(h.querySelectorAll('.w>span'),{yPercent:110,duration:.8,ease:'power4.out',stagger:.05});});}});
+    // the guarantee stamp lands like a rubber stamp
+    gsap.utils.toArray('.stamp').forEach(function(s){gsap.fromTo(s,{rotation:-200,scale:.4},{rotation:-12,scale:1,duration:1.2,ease:'back.out(1.6)',scrollTrigger:{trigger:s,start:'top 85%',once:true}});});
+    // stars pop one by one
+    gsap.utils.toArray('.stars').forEach(function(s){s.innerHTML=s.textContent.split('').map(function(c){return '<span style="display:inline-block">'+c+'</span>';}).join('');
+      gsap.from(s.children,{scale:0,rotation:-90,duration:.5,ease:'back.out(3)',stagger:.08,scrollTrigger:{trigger:s,start:'top 90%',once:true}});});
+    // the giant word in each closing band drifts with the scroll
+    gsap.utils.toArray('.band').forEach(function(b){gsap.fromTo(b.querySelector('.bandword'),{xPercent:-8},{xPercent:22,ease:'none',scrollTrigger:{trigger:b,start:'top bottom',end:'bottom top',scrub:true}});});
+    gsap.utils.toArray('.steps li i').forEach(function(el,i){gsap.fromTo(el,{scaleX:0},{scaleX:1,duration:.9,delay:i*.25,ease:'power2.inOut',scrollTrigger:{trigger:'.steps',start:'top 80%',once:true}});});
+  }
+  if(hasG&&!calm)initMotion();
+
+  function countUp(view){
+    if(!hasG||calm)return;
+    document.querySelectorAll('#v-'+view+' [data-n]').forEach(function(b){var o={v:0},n=+b.getAttribute('data-n');
+      gsap.to(o,{v:n,duration:1.4,ease:'power2.out',onUpdate:function(){b.textContent=Math.round(o.v);}});});
+  }
+
+  var flo=document.querySelector('.float'),floText={home:'רוצים אתר כזה?',barber:'קביעת תור',bakery:'הזמנת עוגה',coach:'שיעור ניסיון'};
+  var prog=document.querySelector('.progress');
+  addEventListener('scroll',function(){
+    flo.classList.toggle('show',scrollY>innerHeight*1.3);
+    var max=document.documentElement.scrollHeight-innerHeight;prog.style.transform='scaleX('+(max>0?scrollY/max:0)+')';
+  },{passive:true});
+  var tint={home:'#FFC300',barber:'#E8323C',bakery:'#FF7A9A',coach:'#FF6A1A'},wipe=document.querySelector('.wipe');
+  var tint2={home:'#FF8A00',barber:'#FF7A45',bakery:'#FFB36B',coach:'#FFC300'};
+  function show(v){
+    views.forEach(function(n){document.getElementById('v-'+n).hidden=(n!==v);});
+    window.scrollTo(0,0);
+    var grad='linear-gradient(120deg,'+tint[v]+','+tint2[v]+')';
+    flo.textContent=floText[v];flo.style.background=grad;prog.style.background=grad;flo.setAttribute('data-scroll',v==='home'?'contact':'cta-'+v);
+    start3D(v);countUp(v);
+    if(hasG&&!calm){ScrollTrigger.refresh();if(active)active.size();gsap.from('#v-'+v+' .hero h1 .w>span',{yPercent:110,duration:.9,ease:'power4.out',stagger:.06,delay:.15});}
+  }
+  // switching sites: a colour panel sweeps across in the next site's accent
+  function go(h,animate){
+    var v=views.indexOf(h)>-1?h:'home';
+    if(!animate||!hasG||calm){show(v);return;}
+    wipe.style.background=tint[v];
+    gsap.timeline().set(wipe,{transformOrigin:'100% 50%'}).to(wipe,{scaleX:1,duration:.45,ease:'power3.in'})
+      .add(function(){show(v);}).set(wipe,{transformOrigin:'0% 50%'}).to(wipe,{scaleX:0,duration:.55,ease:'power3.out'});
+  }
+
+  // custom cursor and magnetic buttons, mouse only
+  function initCursor(){
+  if(hasG&&!calm&&matchMedia('(pointer: fine)').matches){
+    var cur=document.querySelector('.cursor'),qx=gsap.quickTo(cur,'x',{duration:.25,ease:'power3'}),qy=gsap.quickTo(cur,'y',{duration:.25,ease:'power3'});
+    addEventListener('pointermove',function(e){cur.classList.add('on');qx(e.clientX);qy(e.clientY);});
+    document.addEventListener('pointerover',function(e){cur.classList.toggle('big',!!(e.target.closest&&e.target.closest('button,.btn')));});
+    document.querySelectorAll('.btn').forEach(function(b){
+      b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();gsap.to(b,{x:(e.clientX-r.left-r.width/2)*.3,y:(e.clientY-r.top-r.height/2)*.4,duration:.3});});
+      b.addEventListener('pointerleave',function(){gsap.to(b,{x:0,y:0,duration:.7,ease:'elastic.out(1,0.4)'});});
+    });
+    // cards tilt gently toward the pointer
+    document.querySelectorAll('.card,.rev,.plan').forEach(function(el){
+      el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+        gsap.to(el,{rotationY:px*8,rotationX:-py*8,transformPerspective:900,duration:.4,ease:'power2.out'});});
+      el.addEventListener('pointerleave',function(){gsap.to(el,{rotationY:0,rotationX:0,duration:.6,ease:'power3.out'});});
+    });
+  }
+  }
+  initCursor();
+  // the artifact viewer doesn't follow in-page # links, so views switch by hand
+  document.addEventListener('click',function(e){
+    var cp=e.target.closest&&e.target.closest('[data-copy]');
+    if(cp){var num=cp.getAttribute('data-copy'),say=function(m){var t=document.querySelector('.toast');t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('on');},2600);};
+      try{navigator.clipboard.writeText(num).then(function(){say('המספר הועתק');},function(){say(num);});}catch(err){say(num);}return;}
+    // sample-site buttons explain themselves instead of doing nothing
+    var demo=e.target.closest&&e.target.closest('#v-barber .btn,#v-bakery .btn,#v-coach .btn');
+    if(demo){var t=document.querySelector('.toast');t.textContent='באתר האמיתי, הכפתור הזה פותח וואטסאפ עם העסק';t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('on');},2600);return;}
+    var b=e.target.closest&&e.target.closest('[data-go],[data-scroll]');if(!b)return;
+    if(b.hasAttribute('data-go'))go(b.getAttribute('data-go'),true);
+    else{var t=document.getElementById(b.getAttribute('data-scroll'));if(t)t.scrollIntoView({behavior:calm?'auto':'smooth'});}
+  });
+  var first=(location.hash||'').slice(1);
+  (document.fonts&&document.fonts.ready?Promise.race([document.fonts.ready,new Promise(function(r){setTimeout(r,1500);})]):Promise.resolve()).then(function(){go(first);});
+})();
+</script>
+</body>
+</html>
